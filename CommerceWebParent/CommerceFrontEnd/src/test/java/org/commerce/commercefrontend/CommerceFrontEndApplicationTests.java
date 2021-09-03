@@ -1,10 +1,10 @@
-package org.commerce.commercewebparent;
+package org.commerce.commercefrontend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommerceWebParentApplicationTests {
+class CommerceFrontEndApplicationTests {
 
     @Test
     void contextLoads() {
