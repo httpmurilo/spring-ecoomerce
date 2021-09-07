@@ -1,6 +1,7 @@
 package org.commerce.common.entity;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 @Table(name="roles")
@@ -13,7 +14,7 @@ public class Role {
     @Column(length = 40,nullable = false, unique = true)
     private String name;
 
-    @Column(length =  15, nullable = false)
+    @Column(length =  150 , nullable = false)
     private String description;
 
     public Integer getId() {

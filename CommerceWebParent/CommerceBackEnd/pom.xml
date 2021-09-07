@@ -26,6 +26,8 @@
             <version>3.20.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
