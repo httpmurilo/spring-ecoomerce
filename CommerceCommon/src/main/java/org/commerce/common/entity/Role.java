@@ -25,6 +25,15 @@ public class Role {
         this.id = id;
     }
 
+    public Role(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     public String getName() {
         return name;
     }

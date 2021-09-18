@@ -20,4 +20,8 @@ Fixed Roles
 2. Salesperson - Mange product price, customer, shipping, orders and sales report.
 3. Editor - manage categories, brands, products, articles and menus.
 4. Shipper - view products, view order and update order status.
-5. mange question and reviews
+5. manage question and reviews
+
+Endpoints ;
+Admin portal
+http://localhost:8080/commerceAdmin
