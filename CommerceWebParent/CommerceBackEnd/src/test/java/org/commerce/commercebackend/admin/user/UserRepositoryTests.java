@@ -28,7 +28,7 @@ public class UserRepositoryTests {
     @Test
     public void testCreateNewUserWithOneRole() {
         Role roleAdmin = testEntityManager.find(Role.class, 1);
-        User newUser = new User("murilo@murilo.com","1234","murilo","edu");
+        User newUser = new User("murilo2@murilo.com","1234","murilo","edu");
         newUser.addRole(roleAdmin);
 
         User savedUser = userRepository.save(newUser);
@@ -38,7 +38,7 @@ public class UserRepositoryTests {
     @Test
     public void testCreateNewUserWithTwoRole() {
 
-        User newUser = new User("murilo2@murilo.com","1234","murilo","edu");
+        User newUser = new User("murilo222@murilo.com","1234","murilo","edu");
         Role roleAdmin = new Role(1);
         Role roleEditor = new Role(3);
         Role roleAssistant = new Role(5);
@@ -59,13 +59,13 @@ public class UserRepositoryTests {
 
     @Test
     public void testGetUserById() {
-        User user = userRepository.findById(1).get();
+        User user = userRepository.findById(5).get();
         assertThat(user).isNotNull();
     }
 
     @Test
     public void testUpdateUserDetails() {
-        User newUser = userRepository.findById(1).get();
+        User newUser = userRepository.findById(6).get();
         newUser.setEnabled(true);
         newUser.setEmail("ok");
 
@@ -74,7 +74,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testUpdateUserRoles() {
-        User newUser = userRepository.findById(1).get();
+        User newUser = userRepository.findById(5).get();
         Role roleAdmin = new Role(1);
 
         newUser.getRoles().remove(roleAdmin);
@@ -85,7 +85,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testDeleteUser() {
-        Integer userId = 2;
+        Integer userId = 6;
         userRepository.deleteById(userId);
     }
 
@@ -99,9 +99,38 @@ public class UserRepositoryTests {
 
     @Test
     public void testGetUserByEmail() {
-        String email = "murilo@outlook.com";
+        String email = "murilo2@murilo.com";
         User user = userRepository.getUserByEmail(email);
 
         assertThat(user).isNotNull();
     }
+
+    @Test
+    public void testCountByInvalidId() {
+        Integer id = 100;
+        Long countById = userRepository.countById(id);
+
+        assertThat(countById).isZero();
+    }
+
+    @Test
+    public void testCountById() {
+        Integer id = 5;
+        Long countById = userRepository.countById(id);
+
+        assertThat(countById).isNotNull().isGreaterThan(0);
+    }
+
+    @Test
+    public void testDisableUser() {
+        Integer id = 5;
+        userRepository.updateEnabledStatus(id, false);
+    }
+
+    @Test
+    public void testEnableUser() {
+        Integer id = 5;
+        userRepository.updateEnabledStatus(id, true);
+    }
+
 }
