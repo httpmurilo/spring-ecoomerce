@@ -6,6 +6,7 @@ import org.commerce.commercebackend.admin.util.FileUploadUtil;
 import org.commerce.common.entity.Role;
 import org.commerce.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -27,9 +28,27 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users")
-    public String listAll(Model model) {
-        List<User> listUser = userService.listAll();
-        model.addAttribute("listUsers", listUser);
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
+    }
+
+    @GetMapping("/users/page/{pageNum}")
+    public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+        Page<User> pageUser = userService.listByPage(pageNum);
+        List<User> listUsers = pageUser.getContent();
+
+        long startCount = (pageNum - 1) * UserService.USER_PER_PAGE + 1;
+        long endCount = startCount + UserService.USER_PER_PAGE -1 ;
+
+        if(endCount > pageUser.getTotalElements()){
+            endCount = pageUser.getTotalElements();
+        }
+
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", pageUser.getTotalElements());
+        model.addAttribute("listUsers", listUsers);
+
         return "users";
     }
 
@@ -63,8 +82,6 @@ public class UserController {
                 userService.save(user);
 
         }
-
-
 
         redirectAttributes.addFlashAttribute("message","The user has been saved successfully");
 
