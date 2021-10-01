@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping("/users/page/{pageNum}")
     public String listByPage(
                              @PathVariable(name = "pageNum") int pageNum, Model model,
-                             @Param("sortField") String sortField, @Param("sortDir") String sortDir,
+                             @Param(" ") String sortField, @Param("sortDir") String sortDir,
                              @Param("keyword") String keyword) {
 
         Page<User> pageUser = userService.listByPage(pageNum, sortField, sortDir, keyword);
