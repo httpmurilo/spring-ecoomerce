@@ -3,6 +3,7 @@ package org.commerce.commercebackend.admin.user.controller;
 import org.commerce.commercebackend.admin.user.services.UserService;
 import org.commerce.commercebackend.admin.user.services.exceptions.UserNotFoundException;
 import org.commerce.commercebackend.admin.util.FileUploadUtil;
+import org.commerce.commercebackend.admin.util.UserCsvExporter;
 import org.commerce.common.entity.Role;
 import org.commerce.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -144,6 +146,12 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @GetMapping("/users/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<User> userList = userService.listAll();
+        UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(userList, response);
+    }
 
 
 }
