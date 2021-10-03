@@ -4,6 +4,7 @@ import org.commerce.commercebackend.admin.user.services.UserService;
 import org.commerce.commercebackend.admin.user.services.exceptions.UserNotFoundException;
 import org.commerce.commercebackend.admin.util.FileUploadUtil;
 import org.commerce.commercebackend.admin.util.UserCsvExporter;
+import org.commerce.commercebackend.admin.util.UserPdfExporter;
 import org.commerce.common.entity.Role;
 import org.commerce.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,14 @@ public class UserController {
     public void exportToCSV(HttpServletResponse response) throws IOException {
         List<User> userList = userService.listAll();
         UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(userList, response);
+    }
+
+    @GetMapping("/users/export/pdf")
+    public void exportToPdf(HttpServletResponse response) throws IOException {
+        List<User> userList = userService.listAll();
+
+        UserPdfExporter exporter = new UserPdfExporter();
         exporter.export(userList, response);
     }
 
