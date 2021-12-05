@@ -49,12 +49,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
+                    .formLogin()
                     .loginPage("/login")
                     .usernameParameter("email")
                     .permitAll()
-                    .and()
+                .and()
                     .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .rememberMe()
+                    .key("AbcDefgHijKlmnOpqrs_1234567890")
+                    .tokenValiditySeconds(7 * 24 * 60 * 60);
     }
 }

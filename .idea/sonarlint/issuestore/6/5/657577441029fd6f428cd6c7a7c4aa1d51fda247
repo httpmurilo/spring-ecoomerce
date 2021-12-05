@@ -1,0 +1,11 @@
+
+[
+java:S4684T"@Replace this persistent entity with a simple POJO or DTO object.(úƒ·¸ÿÿÿÿÿ
+f
+java:S1192|"PDefine a constant instead of duplicating this literal "redirect:/users" 3 times.(Ñ“é
+^
+java:S1192f"HDefine a constant instead of duplicating this literal "message" 5 times.(şÑØ¿
+V
+java:S21840"@Cast one of the operands of this addition operation to a "long".(ü×ÌÓ
+¢
+java:S2681b"†This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.(üåã­şÿÿÿÿ
